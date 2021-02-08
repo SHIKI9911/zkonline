@@ -40,10 +40,13 @@
  <div class="collapse navbar-collapse" id="my-nav">
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url 'index' %}">主页</a></li>
+            <li class="active"><a href="{% url 'course_list' %}">课程</a></li>
+            <li class="active"><a href="{% url 'teacher_list' %}">教师</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if request.session.is_login %}
                   <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
+                  <li><a href="{% url 'user_center' %}">个人中心</a></li>
                   <li><a href="{% url 'logout' %}">登出</a></li>
               {% else %}
                   <li><a href="{% url 'login' %}">登录</a></li>
@@ -61,6 +64,5 @@
     <script src="{% static 'js_plus/jquery-3.1.1.min.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
-    {% block js %}{% endblock %}
   </body>
 </html>

@@ -20,7 +20,7 @@ from django.conf.urls import url, include
 
 import xadmin
 
-from apps.users.views import LoginView, LogoutView
+from apps.users.views import LoginView, LogoutView, RegisterView
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -28,7 +28,7 @@ urlpatterns = [
     path('index/', TemplateView.as_view(template_name='index.html'), name='index'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('register/', TemplateView.as_view(template_name='register.html'), name='register'),
+    path('register/', RegisterView.as_view(), name='register'),
     path('login/forgetpwd/', TemplateView.as_view(template_name='forgetpwd.html'), name='forgetpwd'),
     # user
     path('user_center/', TemplateView.as_view(template_name='user_center.html'), name='user_center'),
