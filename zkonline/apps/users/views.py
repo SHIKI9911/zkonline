@@ -78,7 +78,7 @@ class RegisterView(View):
                 msg = "两次输入的密码不同！"
                 return render(request, 'register.html', locals())
             else:
-                same_name_user = UserProfile.objects.filter(name=username)
+                same_name_user = UserProfile.objects.filter(username=username)
                 if same_name_user:  # 用户名唯一
                     msg = '用户已经存在，请重新选择用户名！'
                     return render(request, 'register.html', locals())
@@ -93,7 +93,7 @@ class RegisterView(View):
 
                 # 将数据存入数据库
                 new_user = UserProfile.objects.create()
-                new_user.name = username
+                new_user.username = username
                 new_user.password = hash_code(password1)  # 使用加密密码
                 new_user.email = email
                 new_user.gender = sex

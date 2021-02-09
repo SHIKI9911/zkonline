@@ -4,7 +4,7 @@ from apps.users.models import UserProfile
 
 
 class UserProfileAdmin(object):
-    list_display = ['id', 'real_name', 'mobile_number', 'gender', 'email', 'is_superuser']
+    list_display = ['id','username', 'real_name', 'mobile_number', 'gender', 'email', 'is_superuser']
     # 后台默认显示
     search_fields = ['real_name', 'mobile_number', 'email']
     # 搜索

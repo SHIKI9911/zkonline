@@ -1,15 +1,15 @@
 {% extends 'base_plus.html' %}
 {% block content %}
     {% if request.session.is_login %}
-    <h1>你好,{{ request.session.user_name }}！欢迎回来！</h1>
+        <h1>登录时显示这个页面</h1>
+        <img src="../static/media/image/1012.png">
     {% else %}
     <br />
     <br />
     <br />
     <h1>未登录时显示这个页面</h1>
     <img src="../static/media/image/1012.png">
-        {% else%}
-        <h1>登录时显示这个页面</h1>
-    <img src="../static/media/image/1012.png">
+
+
     {% endif %}
 {% endblock %}
