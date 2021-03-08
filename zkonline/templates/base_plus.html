@@ -11,53 +11,67 @@
 
     <!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <link href="{% static 'mycss/header.css' %}" rel="stylesheet">
+    <link href="{% static 'mycss/footer.css' %}" rel="stylesheet">
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
     <![endif]-->
     {% block css %}{% endblock %}
 
   </head>
   <body>
+    <header>
+		<div  class=" header">
+ 			<div class="top">
+				<div class="wp">
+					<div class="fl" style="margin-left: 50px; "><p><b>污水处理线上教学平台</b></p></div>
+					<!--登录后跳转-->
+						{% if user.is_authenticated %}
+                            <div class="personal">
+                                <div class="userdetail">
+
+                                    <div class="btn">
+                                        <a class="personcenter fl" href="{% url 'user_center' %}">进入个人中心</a>
+                                        <a class="fr" href="{% url 'logout' %}">退出</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <a style="color:white" class="registerbtn" href="{% url 'register' %}">注册</a>
+                            <a style="color:white" class="loginbtn" href="{% url 'login' %}">登录</a>
+                            <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</p>
+                        {% endif %}
+				</div>
+			</div>
+
     <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
-            <span class="sr-only">切换导航条</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">污水处理线上教学</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-
- <div class="collapse navbar-collapse" id="my-nav">
-          <ul class="nav navbar-nav">
+     <div class="collapse navbar-collapse" id="my-nav">
+          <ul class="nav navbar-nav" style="margin-left: -160px;" >
             <li class="active"><a href="{% url 'index' %}">主页</a></li>
             <li class="active"><a href="{% url 'course_list' %}">课程</a></li>
             <li class="active"><a href="{% url 'teacher_list' %}">教师</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-              {% if user.is_authenticated %}
-                  <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
-                  <li><a href="{% url 'user_center' %}">个人中心</a></li>
-                  <li><a href="{% url 'logout' %}">登出</a></li>
-              {% else %}
-                  <li><a href="{% url 'login' %}">登录</a></li>
-                  <li><a href="{% url 'register' %}">注册</a></li>
-              {% endif %}
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+          <form class="navbar-form navbar-right" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control" />
+						</div> <button type="submit" class="btn btn-default">搜索</button>
+          </form>
 
-    {% block content %}{% endblock %}
+        </div>
+    </nav>
+ {% block content %}{% endblock %}
+<footer>
+		<div class="footer">
+            <div class="cont" >
+                <h3 style="font-size: 20px; letter-spacing: 1px; border-bottom: 1px solid #fff; padding: 0 0 15px; margin: 17px 0 15px; color: #fff;">联系我们</h3>
+                <p style="font-size: 14px; ">地址：广东省广州市海珠区纺织路东沙街24号仲恺农业工程学院</p>
+                <p style="font-size: 14px; ">电话：020-89003030</p>
+                <p style="font-size: 14px; ">邮箱：zsb@zhku.edu.cn</p>
+                <p style="font-size: 14px; ">官网：http://www.zhku.edu.cn</p>
+          </div>
+        </div>
+</footer>
+
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

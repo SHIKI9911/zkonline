@@ -1,0 +1,72 @@
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+}
+.headerwrap {
+    height: 192px;
+    width: 100%;
+}
+
+.header {
+    width: 100%;
+    height: 192px;
+    background: #fff;
+}
+
+.header .top {
+    height: 38px;
+    line-height: 38px;
+    background: #3a3a3a;
+    color: #fff;
+    width: 100%;
+}
+
+.header .top .wp ul {
+    height: 38px;
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+.loginbtn {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 4px;
+    background: #616161;
+    margin-left: 2px;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+}
+
+.registerbtn {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 4px;
+    margin-right:20px;
+    background: #616161;
+    margin-left: 2px;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+}
