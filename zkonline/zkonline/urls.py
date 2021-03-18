@@ -14,13 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.views.generic import TemplateView
 from django.conf.urls import url, include
+from django.views.static import serve
 
 import xadmin
 
 from apps.users.views import LoginView, LogoutView, RegisterView
+from apps.courses.views import CourseListView
+from zkonline.settings import MEDIA_ROOT
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -30,13 +33,21 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/forgetpwd/', TemplateView.as_view(template_name='forgetpwd.html'), name='forgetpwd'),
+
     # user
     path('user_center/', TemplateView.as_view(template_name='user_center.html'), name='user_center'),
     path('user_message/', TemplateView.as_view(template_name='user_message.html'), name='user_message'),
+
     # course
-    path('course_list/', TemplateView.as_view(template_name='course_list.html'), name='course_list'),
+    url(r'^course', include(('apps.courses.urls',"course"),namespace='course_')),
+
     # teacher
     path('teacher_list/', TemplateView.as_view(template_name='teacher_list.html'), name='teacher_list'),
+
+    # captcha
     url(r'^captcha/', include('captcha.urls')),
+
+    # 配置上传文件的访问url
+    url(r'^media/(?P<path>.*)$',serve,{"document_root": MEDIA_ROOT}),
 
 ]

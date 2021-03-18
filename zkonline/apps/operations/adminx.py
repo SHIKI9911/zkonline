@@ -36,18 +36,7 @@ class UserMessageAdmin(object):
     # 设置可编辑字段
 
 
-class UserCoursesAdmin(object):
-    list_display = ['is_finished', 'user', 'course']
-    # 后台默认显示
-    search_fields = ['user', 'course']
-    # 搜索
-    list_filter = ['is_finished', 'user', 'course']
-    # 过滤器
-    list_editable = ['is_finished', 'user', 'course']
-    # 设置可编辑字段
-
-
 xadmin.site.register(CourseComment, CourseCommentAdmin)
 xadmin.site.register(UserFavorite, UserFavoriteAdmin)
 xadmin.site.register(UserMessage, UserMessageAdmin)
-xadmin.site.register(UserCourses, UserCoursesAdmin)
+

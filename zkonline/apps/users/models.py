@@ -23,10 +23,10 @@ class UserProfile(AbstractUser):  # 用户信息
     # 必须填入手机号，不能为空，不可重复
     gender = models.CharField(verbose_name='性别', choices=gender_choices, max_length=6)
     # 性别为男或者女，max_length 为 female 单词的长度
-    profile = models.ImageField(verbose_name='头像', upload_to='profile_img/teacher/%Y/%m',
-                                default='/profile_img/user/default_profile.png')
+    profile = models.ImageField(verbose_name='头像', upload_to='profile_img/user/%Y/%m',
+                                default='profile_img/teacher/default_profile.png')
 
-    # 头像, 自动上传到profile_img当中, 默认头像为media/profile_img/default_profile.png
+    # 头像, 自动上传到profile_img当中, 默认头像为media/profile_img/teacher/default_profile.png
 
     class Meta:
         verbose_name = '用户信息'

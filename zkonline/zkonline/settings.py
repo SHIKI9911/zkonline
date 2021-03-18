@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'xadmin',
     'captcha',
+    'pure_pagination',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
 
             ],
         },
@@ -127,7 +129,10 @@ USE_TZ = False
 # Static files (css, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# 引用外部资源库路径,该路径是一个列表
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+
+# 媒体库路径，该路径唯一，不能为列表
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
