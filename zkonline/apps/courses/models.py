@@ -16,13 +16,14 @@ from apps.teachers.models import Teacher
 
 class Course(BaseModel):
     name = models.CharField(verbose_name='课程名', max_length=100)
-    desc = models.CharField(verbose_name='课程描述', max_length=300)
+    notice = models.CharField(verbose_name='课程公告', max_length=300)
     learn_times = models.IntegerField(verbose_name='学习时长(分钟）', default=0)
     click_nums = models.IntegerField(verbose_name='点击量', default=0)
     student_nums = models.IntegerField(verbose_name='学生数', default=0)
     category = models.CharField(null=True, max_length=20, verbose_name='课程类型')
     tag = models.CharField(verbose_name='标签', default='', max_length=20)
-    detail = models.TextField(verbose_name='课程详情')
+    lesson_nums = models.IntegerField(verbose_name="章节数", default=0)
+    detail = models.TextField(verbose_name='课程详情', max_length=500)
     course_img = models.ImageField(verbose_name='课程图片', upload_to='profile_img/course_img/%Y/%m',
                                    default='course_img.default_img.jpg') # 访问路径为url，在浏览器中无法访问本地
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
@@ -35,6 +36,12 @@ class Course(BaseModel):
 
     def __str__(self):
         return self.name
+
+    def lesson_nums(self):
+        return self.lesson_set.all().count()
+
+    def get_course_lesson(self):
+        return self.lesson_set.all()
 
 
 class Lesson(BaseModel):

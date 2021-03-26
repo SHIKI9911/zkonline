@@ -41,14 +41,6 @@ class CourseComment(BaseModel):  # 课程评论
         return self.content
 
 
-class UserFavorite(BaseModel):  # 用户收藏
-    fav_id = models.IntegerField(verbose_name='数据id')
-    fav_type = models.IntegerField(choices=((1, '课程'), (2, '教师'),), default=1, verbose_name='收藏类型')
-
-    class Meta:
-        verbose_name = '用户收藏'
-        verbose_name_plural = '用户收藏'
-
 
 class UserMessage(BaseModel):  # 通知
     user = models.ForeignKey(UserProfile, verbose_name='用户', on_delete=models.CASCADE)
@@ -69,5 +61,5 @@ class UserCourses(BaseModel):  # 用户学习的课程
     course = models.ForeignKey(Course, verbose_name='课程', on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = '我的课程'
-        verbose_name_plural = '我的课程'
+        verbose_name = '用户课程'
+        verbose_name_plural = '用户课程'

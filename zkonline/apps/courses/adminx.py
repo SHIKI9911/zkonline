@@ -16,24 +16,24 @@ class BaseSetting(object):
 
 
 class CourseAdmin(object):
-    list_display = ['name', 'category', 'tag', 'detail', 'learn_times', 'click_nums', 'student_nums', 'desc']
+    list_display = ['name', 'category', 'tag', 'detail', 'learn_times', 'click_nums', 'student_nums', 'notice', 'lesson_nums', 'course_img']
     # 后台默认显示
     search_fields = ['name', 'tag', 'category']
     # 搜索
     list_filter = ['tag', 'category']
     # 过滤器
-    list_editable = ['name', 'desc', 'tag', 'detail', 'category']
+    list_editable = ['name', 'notice', 'tag', 'detail', 'category', 'course_img']
     # 设置可编辑字段
 
 
 class LessonAdmin(object):
-    list_display = ['course', 'name', 'tag', 'learn_times' ]
+    list_display = ['course', 'name', 'learn_times' ]
     # 后台默认显示
-    search_fields = ['course', 'name', 'tag']
+    search_fields = ['course', 'name']
     # 搜索
-    list_filter = ['course', 'name', 'tag', 'learn_times']
+    list_filter = ['course', 'name', 'learn_times']
     # 过滤器
-    list_editable = ['course', 'name', 'tag', 'learn_times']
+    list_editable = ['course', 'name', 'learn_times']
     # 设置可编辑字段
 
 

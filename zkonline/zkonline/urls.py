@@ -22,7 +22,6 @@ from django.views.static import serve
 import xadmin
 
 from apps.users.views import LoginView, LogoutView, RegisterView
-from apps.courses.views import CourseListView
 from zkonline.settings import MEDIA_ROOT
 
 urlpatterns = [
@@ -42,10 +41,13 @@ urlpatterns = [
     url(r'^course', include(('apps.courses.urls',"course"),namespace='course_')),
 
     # teacher
-    path('teacher_list/', TemplateView.as_view(template_name='teacher_list.html'), name='teacher_list'),
+    url(r'^teacher', include(('apps.teachers.urls',"teacher"),namespace='teacher_')),
 
     # captcha
     url(r'^captcha/', include('captcha.urls')),
+
+     #用户相关操作
+    url(r'^op/', include(('apps.operations.urls', "operations"), namespace="op")),
 
     # 配置上传文件的访问url
     url(r'^media/(?P<path>.*)$',serve,{"document_root": MEDIA_ROOT}),
