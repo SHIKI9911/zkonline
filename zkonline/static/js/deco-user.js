@@ -245,8 +245,10 @@ $(function(){
             $jsEditUserForm = $('#jsEditUserForm')
             verify = verifySubmit(
             [
-                {id: '#nick_name', tips: Dml.Msg.epNickName, require: true},
-                {id: '#birth_day', tips: Dml.Msg.epBirthday, require: true}
+                {id: '#user_name', tips: Dml.Msg.epUserName, require: true},
+                {id: '#real_name', tips: Dml.Msg.epName, require: true},
+                {id: '#mobile', tips: Dml.Msg.epPhone, require: true},
+                {id: '#email', tips: Dml.Msg.epMail, require: true}
             ]
         );
         if(!verify){
@@ -264,12 +266,15 @@ $(function(){
                 _self.attr('disabled',true);
             },
             success: function(data) {
-                if(data.nick_name){
-                    _showValidateError($('#nick_name'), data.nick_name);
-                }else if(data.birthday){
-                   _showValidateError($('#birth_day'), data.birthday);
-                }else if(data.address){
-                   _showValidateError($('#address'), data.address);
+                if(data.user_name){
+                    _showValidateError($('#user_name'), data.user_name);
+                }else if(data.real_name){
+                   _showValidateError($('#real_name'), data.real_name);
+                }else if(data.mobile){
+                   _showValidateError($('#mobile'), data.mobile);
+                }else if(data.mail){
+                   _showValidateError($('#email'), data.email);
+
                 }else if(data.status == "fail"){
                      Dml.fun.showTipsDialog({
                         title: '保存失败',
