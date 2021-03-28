@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-{% load static%}
+{% load static %}
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>{% block title %}base{% endblock %}</title>
 
@@ -24,11 +24,11 @@
             <div  class=" header" >
                 <div class="top">
                     <div class="wp">
-                        <div class="fl" style="margin-left: 50px; "><a href="{% url 'index' %}" style="color: white">污水处理线上教学平台</a></div>
+                        <div class="fl" style="margin-left: 50px; "><a href="{% url 'index' %}" style="color: white">环境学院线上教学平台</a></div>
                         <!--登录后跳转-->
                             {% if user.is_authenticated %}
                                  <a style="color:white; font-size: small; margin-right: 20px" class="registerbtn"  href="{% url 'logout' %}">退出</a>
-                                 <a style="color:white; font-size: small" class="loginbtn" href="{% url 'user_center' %}">个人中心</a>
+                                 <a style="color:white; font-size: small" class="loginbtn" href="{% url 'users:info' %}">个人中心</a>
                             {% else %}
                                 <a style="color:white; font-size: small; margin-right: 20px" class="registerbtn" href="{% url 'register' %}">注册</a>
                                 <a style="color:white; font-size: small" class="loginbtn" href="{% url 'login' %}">登录</a>
@@ -52,8 +52,8 @@
         </nav>
      </header>
 
-     {% block content %}
-     {% endblock %}
+      {% block custom_bread %}{% endblock %}
+      {% block content %}{% endblock %}
 
     <footer>
             <div class="footer">

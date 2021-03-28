@@ -1,6 +1,6 @@
 import xadmin
 
-from apps.operations.models import CourseComment, UserMessage, UserCourses
+from apps.operations.models import CourseComment, UserMessage, UserCourses,Banner
 
 
 class CourseCommentAdmin(object):
@@ -14,15 +14,15 @@ class CourseCommentAdmin(object):
     # 设置可编辑字段
 
 
-# class UserFavoriteAdmin(object):
-#     list_display = ['fav_id', 'fav_type']
-#     # 后台默认显示
-#     search_fields = ['fav_id', 'fav_type']
-#     # 搜索
-#     list_filter = ['fav_id', 'fav_type']
-#     # 过滤器
-#     list_editable = ['fav_id', 'fav_type']
-#     # 设置可编辑字段
+class BannerAdmin(object):
+    list_display = ['title', 'image', 'url', 'index']
+    # 后台默认显示
+    search_fields = ['title', 'index']
+    # 搜索
+    list_filter = ['title', 'index']
+    # 过滤器
+    list_editable = ['title', 'image', 'url', 'index']
+    # 设置可编辑字段
 
 
 class UserMessageAdmin(object):
@@ -48,4 +48,4 @@ class UserCoursesAdmin(object):
 xadmin.site.register(CourseComment, CourseCommentAdmin)
 xadmin.site.register(UserCourses, UserCoursesAdmin)
 xadmin.site.register(UserMessage, UserMessageAdmin)
-
+xadmin.site.register(Banner, BannerAdmin)

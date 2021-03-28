@@ -23,25 +23,25 @@ import xadmin
 
 from apps.users.views import LoginView, LogoutView, RegisterView
 from zkonline.settings import MEDIA_ROOT
+from apps.operations.views import IndexView
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('xadmin/', xadmin.site.urls),
-    path('index/', TemplateView.as_view(template_name='index.html'), name='index'),
+    path('index/', IndexView.as_view(), name='index'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/forgetpwd/', TemplateView.as_view(template_name='forgetpwd.html'), name='forgetpwd'),
 
     # user
-    path('user_center/', TemplateView.as_view(template_name='user_center.html'), name='user_center'),
-    path('user_message/', TemplateView.as_view(template_name='user_message.html'), name='user_message'),
+    url(r'^usercenter', include(('apps.users.urls',"users"),namespace='users')),
 
     # course
-    url(r'^course', include(('apps.courses.urls',"course"),namespace='course_')),
+    url(r'^course', include(('apps.courses.urls',"course"),namespace='course')),
 
     # teacher
-    url(r'^teacher', include(('apps.teachers.urls',"teacher"),namespace='teacher_')),
+    url(r'^teacher', include(('apps.teachers.urls',"teacher"),namespace='teacher')),
 
     # captcha
     url(r'^captcha/', include('captcha.urls')),

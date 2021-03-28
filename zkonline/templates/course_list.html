@@ -5,15 +5,19 @@
     <link rel="stylesheet" href={% static 'mycss/mystyle.css' %}
 {% endblock %}
 
-
-{% block content %}
- <section>
+{% block custom_bread %}
+<section>
      <div class="mywp">
         <ul  class="crumbs">
             <li style="list-style-type:none;"><a href="{% url 'index' %}">首页</a>></li>
             <li style="list-style-type:none;">课程列表</li>
         </ul>
     </div>
+</section>
+{% endblock %}
+
+{% block content %}
+ <section>
 	<div class="mywp butler_list_box list">
 	<div class='left'>
 		<div class="all">共<span class="key">{{ courses_nums }}</span>个课程</div>

@@ -2,12 +2,13 @@ from django.shortcuts import render, HttpResponse
 from django.views.generic.base import View
 from django.http import JsonResponse
 
-from apps.operations.models import UserCourses, CourseComment
+from apps.operations.models import UserCourses, CourseComment, Banner
 from apps.courses.models import Course
 
 
 class AddCommentsView(View):
     '''用户评论'''
+
     def post(self, request):
         # 未登录时返回json提示未登录，跳转到登录页面是在ajax中做的
         if not request.user.is_authenticated:
@@ -20,7 +21,7 @@ class AddCommentsView(View):
         content = request.POST.get("content")
 
         if course_id > 0 and content:
-            course= Course.objects.get(id = course_id )
+            course = Course.objects.get(id=course_id)
 
             comment = CourseComment()
             comment.user = request.user
@@ -39,3 +40,10 @@ class AddCommentsView(View):
             })
 
 
+class IndexView(View):
+    def get(self, request, *args, **kwargs):
+        banners = Banner.objects.order_by("index")
+        return render(request, "index.html",
+                      {
+                        "banners":banners
+                      })
