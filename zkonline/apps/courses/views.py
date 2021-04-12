@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 from django.views.generic.base import View
 from pure_pagination import Paginator, PageNotAnInteger
 from django.contrib.auth.mixins import LoginRequiredMixin  # 让页面需要登陆才能看到
+from django.db.models import Q
 
 from apps.courses.models import Course, Lesson, Video, CourseResource
 from apps.operations.models import UserCourses, CourseComment
@@ -12,6 +13,11 @@ class CourseListView(View):
         # 从数据库中获取数据
         all_courses = Course.objects.order_by("-c_time")
         courses_nums = Course.objects.all().count()
+
+        # 搜索关键词
+        keywords = request.GET.get("keywords", "")
+        if keywords:
+            all_courses = all_courses.filter(Q(name__icontains=keywords)|Q(detail__icontains=keywords)|Q(tag__icontains=keywords)|Q(category__icontains=keywords))
 
         # 对课程机构数据进行分页
         # 如果没有页面，则显示一页
@@ -127,3 +133,17 @@ class CourseLessonView(LoginRequiredMixin, View):
         })
 
 
+class DeleteCourseView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
+    def get(self, request, course_id, *args, **kwargs):
+        # 从数据库中获取数据
+        course = Course.objects.filter(id=int(course_id))
+        user_course = UserCourses.objects.filter(user_id=request.user.id, course=course_id)
+        user_course.delete()
+
+        my_courses = UserCourses.objects.filter(user=request.user)
+        return render(request, "user_courses.html", {
+            # "my_courses":my_courses,
+            "my_courses": my_courses
+        })

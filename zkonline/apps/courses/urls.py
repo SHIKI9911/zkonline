@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.urls import path
 
 from apps.courses.views import CourseListView, CourseDetailView, CourseLessonView, CourseCommentsView, CourseVideoView
-
+from apps.courses.views import DeleteCourseView
 
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^(?P<course_id>\d+)/lesson/$', CourseLessonView.as_view(), name="lesson"),
     url(r'^(?P<course_id>\d+)/comments/$', CourseCommentsView.as_view(), name="comments"),
     url(r'^(?P<course_id>\d+)/video/(?P<video_id>\d+)$', CourseVideoView.as_view(), name="video"),
+    url(r'^(?P<course_id>\d+)/delete$', DeleteCourseView.as_view(), name="delete"),
 ]

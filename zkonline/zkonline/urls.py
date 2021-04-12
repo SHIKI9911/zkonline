@@ -35,13 +35,13 @@ urlpatterns = [
     path('login/forgetpwd/', TemplateView.as_view(template_name='forgetpwd.html'), name='forgetpwd'),
 
     # user
-    url(r'^usercenter', include(('apps.users.urls',"users"),namespace='users')),
+    url(r'^users/', include(('apps.users.urls',"users"),namespace='users')),
 
     # course
-    url(r'^course', include(('apps.courses.urls',"course"),namespace='course')),
+    url(r'^course/', include(('apps.courses.urls',"course"),namespace='course')),
 
     # teacher
-    url(r'^teacher', include(('apps.teachers.urls',"teacher"),namespace='teacher')),
+    url(r'^teacher/', include(('apps.teachers.urls',"teacher"),namespace='teacher')),
 
     # captcha
     url(r'^captcha/', include('captcha.urls')),

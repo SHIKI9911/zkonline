@@ -11,7 +11,7 @@ class Teacher(BaseModel):
     name = models.CharField(max_length=20, verbose_name='教师名称', null=False)
     desc = models.TextField(max_length=80 ,verbose_name='教师简介')
     detail = models.TextField(verbose_name='教师详情', default="略", max_length=400)
-    profile = models.ImageField(upload_to='profile_img/teacher/%Y/%m', verbose_name='头像', max_length=100,
+    profile_img = models.ImageField(upload_to='profile_img/teacher/%Y/%m', verbose_name='头像', max_length=100,
                                 default='/profile_img/teacher/default_profile.png')
     gender = models.CharField(verbose_name='性别', choices=gender_choices, max_length=6)
     mobile_number = models.CharField(max_length=11, null=False, unique=True, verbose_name='手机号码')

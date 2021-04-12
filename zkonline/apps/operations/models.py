@@ -15,6 +15,7 @@ from apps.courses.models import Course
 
 UserProfile = get_user_model()
 
+
 class Banner(BaseModel):
     title = models.CharField(max_length=100, verbose_name="标题")
     image = models.ImageField(upload_to="banner/%Y/%m", max_length=200, verbose_name="轮播图")
@@ -28,6 +29,7 @@ class Banner(BaseModel):
     def __str__(self):
         return self.title
 
+
 class CourseComment(BaseModel):  # 课程评论
     user = models.ForeignKey(UserProfile, verbose_name='用户', on_delete=models.CASCADE)
     course = models.ForeignKey(Course, verbose_name='课程', on_delete=models.CASCADE)
@@ -39,7 +41,6 @@ class CourseComment(BaseModel):  # 课程评论
 
     def __str__(self):
         return self.content
-
 
 
 class UserMessage(BaseModel):  # 通知

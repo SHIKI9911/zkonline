@@ -3,16 +3,14 @@ import xadmin
 from apps.courses.models import Course, Lesson, Video, CourseResource
 
 
-class GlobalSetting(object):
-    site_title = '污水处理教学平台'
-    site_footer = '环境学院'
-    menu_style = 'accodion'
+class LessonInline(object):
+    model = Lesson
+    extra = 0
 
 
-class BaseSetting(object):
-    enable_themes = True
-    use_bootswatch = True
-
+class CourseResourceInline(object):
+    model = CourseResource
+    extra = 0
 
 
 class CourseAdmin(object):
@@ -25,6 +23,7 @@ class CourseAdmin(object):
     list_editable = ['name', 'notice', 'tag', 'detail', 'category', 'course_img']
     # 设置可编辑字段
 
+    inlines = [LessonInline,CourseResourceInline]  #增加章节和课程资源, 添加课程的时候，可以直接添加章节和课程资源
 
 class LessonAdmin(object):
     list_display = ['course', 'name', 'learn_times' ]
@@ -64,5 +63,3 @@ xadmin.site.register(Lesson, LessonAdmin)
 xadmin.site.register(Video, VideoAdmin)
 xadmin.site.register(CourseResource, CourseResourceAdmin)
 
-xadmin.site.register(xadmin.views.CommAdminView, GlobalSetting)
-xadmin.site.register(xadmin.views.BaseAdminView, BaseSetting)

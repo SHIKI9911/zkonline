@@ -26,6 +26,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTHENTICATION_BACKENDS = [
+    "apps.users.views.CustomAuth"
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +44,7 @@ INSTALLED_APPS = [
     'apps.courses.apps.CoursesConfig',
     'apps.operations.apps.OperationsConfig',
     'apps.teachers.apps.TeachersConfig',
+
     # third_party apps
     'crispy_forms',
     'xadmin',
