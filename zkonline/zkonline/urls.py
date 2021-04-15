@@ -32,7 +32,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
-    path('login/forgetpwd/', TemplateView.as_view(template_name='forgetpwd.html'), name='forgetpwd'),
+    # path('login/forgetpwd/', TemplateView.as_view(template_name='forgetpwd.html'), name='forgetpwd'),
 
     # user
     url(r'^users/', include(('apps.users.urls',"users"),namespace='users')),
@@ -43,13 +43,22 @@ urlpatterns = [
     # teacher
     url(r'^teacher/', include(('apps.teachers.urls',"teacher"),namespace='teacher')),
 
+    # experiment
+    url(r'^experiment/', include(('apps.experiments.urls',"experiment"),namespace='experiment')),
+
+    # homework
+    url(r'^homework/', include(('apps.homework.urls',"homework"),namespace='homework')),
+
     # captcha
     url(r'^captcha/', include('captcha.urls')),
 
-     #用户相关操作
+     # 用户相关操作
     url(r'^op/', include(('apps.operations.urls', "operations"), namespace="op")),
 
     # 配置上传文件的访问url
     url(r'^media/(?P<path>.*)$',serve,{"document_root": MEDIA_ROOT}),
+
+    # 配置富文本编辑器Ueditor
+    url(r'^ueditor/',include('DjangoUeditor.urls' )),
 
 ]

@@ -24,7 +24,7 @@ SECRET_KEY = 'xj%p(cv=s0ymwas$0t14isau=u!j1*4s@t%7_3d!iwn&=09r@_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = [
     "apps.users.views.CustomAuth"
@@ -39,17 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     # my apps
     'apps.users.apps.UsersConfig',
     'apps.courses.apps.CoursesConfig',
     'apps.operations.apps.OperationsConfig',
     'apps.teachers.apps.TeachersConfig',
+    'apps.experiments.apps.ExperimentsConfig',
+    'apps.homework.apps.HomeworkConfig',
 
-    # third_party apps
+    # extra apps
     'crispy_forms',
     'xadmin',
     'captcha',
     'pure_pagination',
+    'DjangoUeditor',
 ]
 
 MIDDLEWARE = [
@@ -116,6 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 AUTH_USER_MODEL = 'users.UserProfile'
 
 # Internationalization
@@ -136,6 +141,7 @@ USE_TZ = False
 
 # 引用外部资源库路径,该路径是一个列表
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'collect_static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 # 媒体库路径，该路径唯一，不能为列表
