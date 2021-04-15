@@ -18,6 +18,7 @@ from django.urls import path, re_path
 from django.views.generic import TemplateView
 from django.conf.urls import url, include
 from django.views.static import serve
+from captcha.views import captcha_refresh
 
 import xadmin
 
@@ -51,6 +52,7 @@ urlpatterns = [
 
     # captcha
     url(r'^captcha/', include('captcha.urls')),
+    url(r'^refresh/',captcha_refresh ),
 
      # 用户相关操作
     url(r'^op/', include(('apps.operations.urls', "operations"), namespace="op")),

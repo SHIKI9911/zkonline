@@ -52,3 +52,15 @@
         </div>
     </div> <!-- /container -->
 {% endblock %}
+
+{% block js %}
+{#    captcha本质上是一个<img>，里面有src和alt等参数，因此使用.attr()修改即可#}
+<script>
+        $('.captcha').click(function () {
+            $.getJSON('/captcha/refresh/',function (result) {
+                $('.captcha').attr('src',result['image_url']);
+                $('#id_captcha_0').val(result['key']);
+            });
+        });
+</script>
+{% endblock %}

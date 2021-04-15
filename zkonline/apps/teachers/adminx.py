@@ -1,4 +1,9 @@
 import xadmin
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import (UserCreationForm, UserChangeForm,
+                                       AdminPasswordChangeForm, PasswordChangeForm)
+from django.contrib.auth.forms import UserCreationForm, UsernameField
+from .models import *
 
 from apps.teachers.models import Teacher
 

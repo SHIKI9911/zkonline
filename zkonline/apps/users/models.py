@@ -1,8 +1,9 @@
 from datetime import datetime
 
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
+from apps.teachers.models import Teacher
 
 class BaseModel(models.Model):  # 方便被继承的基础类
     c_time = models.DateTimeField(default=datetime.now, verbose_name='创建时间')
@@ -25,6 +26,8 @@ class UserProfile(AbstractUser):  # 用户信息
     # 性别为男或者女，max_length 为 female 单词的长度
     profile_img = models.ImageField(verbose_name='头像', upload_to='profile_img/user/%Y/%m',
                                     default='profile_img/teacher/default_profile.png')
+    is_teacher = models.BooleanField(verbose_name="是否教师",default=False)
+    whitch_teacher = models.OneToOneField(Teacher, on_delete=models.DO_NOTHING, null=True)
 
     # 头像, 自动上传到profile_img当中, 默认头像为media/profile_img/teacher/default_profile.png
 
