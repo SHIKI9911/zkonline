@@ -14,11 +14,6 @@ class CourseListView(View):
         all_courses = Course.objects.order_by("-c_time")
         courses_nums = Course.objects.all().count()
 
-        # 搜索关键词
-        keywords = request.GET.get("keywords", "")
-        if keywords:
-            all_courses = all_courses.filter(Q(name__icontains=keywords)|Q(detail__icontains=keywords)|Q(tag__icontains=keywords)|Q(category__icontains=keywords))
-
         # 对课程机构数据进行分页
         # 如果没有页面，则显示一页
         try:
@@ -42,6 +37,24 @@ class CourseDetailView(View):
         course = Course.objects.get(id=int(course_id))
         course.click_nums += 1
         course.save()
+
+        user_course = UserCourses.objects.filter(course=course,user=request.user)
+        if user_course:
+            course = Course.objects.get(id=int(course_id))
+
+            if not user_course:
+                user_course = UserCourses(user=request.user, course=course)
+                user_course.save()
+
+                course.student_nums += 1
+                course.save()
+
+            course_resources = CourseResource.objects.filter(course=course)
+
+            return render(request, "course_lesson.html", {
+                "course": course,
+                "course_resources": course_resources,
+            })
 
         return render(request, "course_detail.html", {
             "course": course,
