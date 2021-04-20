@@ -22,13 +22,10 @@ class Course(BaseModel):
     student_nums = models.IntegerField(verbose_name='学生数', default=0)
     category = models.CharField(null=True, max_length=20, verbose_name='课程类型')
     tag = models.CharField(verbose_name='标签', default='', max_length=20)
-    lesson_nums = models.IntegerField(verbose_name="章节数", default=0)
     detail = models.TextField(verbose_name='课程详情', max_length=500)
     course_img = models.ImageField(verbose_name='课程图片', upload_to='profile_img/course_img/%Y/%m',
                                    default='course_img.default_img.jpg') # 访问路径为url，在浏览器中无法访问本地
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-
-    # 课程的封面，默认封面暂未设计好
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name="教师")
 
     class Meta:
         verbose_name = '课程信息'

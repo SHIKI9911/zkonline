@@ -91,14 +91,20 @@
 
         <div class="left">
             <ul>
-                <li class="{% if current_page == 'info' %}active2{% endif %}"><a href="{% url 'users:info' %}">个人资料</a>
+                <li class="{% if current_page == 'info' %}active2{% endif %}">
+                    <a href="{% url 'users:info' %}">个人资料</a>
                 </li>
-                <li class="{% if current_page == 'mycourse' %}active2{% endif %}"><a href="{% url 'users:mycourse' %}">我的课程</a>
+                <li class="{% if current_page == 'mycourse' %}active2{% endif %}">
+                    <a href="{% url 'users:mycourse' %}">我的课程</a>
                 </li>
-                <li class="{% if current_page == 'homework' %}active2{% endif %}"><a href="{% url 'users:homework' %}">我的作业</a>
+                <li class="{% if current_page == 'homework' %}active2{% endif %}">
+                    <a href="{% url 'users:homework' %}">我的作业</a>
                 </li>
-                <li class="{% if current_page == 'message' %}active2{% endif %}"><a href="{% url 'users:messages' %}"
-                                                                                    style="position: relative;">我的通知</a>
+                <li class="{% if current_page == 'report' %}active2{% endif %}">
+                    <a href="{% url 'users:report' %}">实验报告</a>
+                </li>
+                <li class="{% if current_page == 'message' %}active2{% endif %}">
+                    <a href="{% url 'users:messages' %}" style="position: relative;">我的通知</a>
                 </li>
             </ul>
         </div>
@@ -189,18 +195,18 @@
 <script src="{% static 'js/deco-user.js' %}"></script>
 
 <script>
-    function change_action(v){
+    function change_action(v) {
         var action_url = ''
-        if(v==1){
+        if (v == 1) {
             action_url = "{% url "op:search_course" %}"
         }
-        if(v==2){
-           action_url = "{% url "op:search_teacher" %}"
+        if (v == 2) {
+            action_url = "{% url "op:search_teacher" %}"
         }
-        if(v==3){
-          action_url = "{% url "op:search_exp" %}"
+        if (v == 3) {
+            action_url = "{% url "op:search_exp" %}"
         }
-        document.search_form.action=action_url
+        document.search_form.action = action_url
     }
 
     function shows(a) {

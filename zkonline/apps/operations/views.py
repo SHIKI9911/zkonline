@@ -98,7 +98,7 @@ class SearchResultCourseView(View):
         if keywords:
             all_courses = all_courses.filter(
                 Q(name__icontains=keywords) | Q(detail__icontains=keywords) | Q(tag__icontains=keywords) | Q(
-                    category__icontains=keywords))
+                    category__icontains=keywords)| Q(teacher_name=keywords))
 
         try:
             page = request.GET.get('page', 1)
@@ -144,4 +144,25 @@ class SearchResultTeacherView(View):
 
 class SearchResultExpView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, "teacher_list.html", )
+        all_exp = Experiment.objects.order_by("-c_time")
+        exp_num = Experiment.objects.all().count()
+
+        # 搜索关键词
+        keywords = request.GET.get("keywords", "")
+        if keywords:
+            all_exp = all_exp.filter(
+                Q(title__icontains=keywords) | Q(detail__icontains=keywords)|Q(teacher__name=keywords))
+
+            try:
+                page = request.GET.get('page', 1)
+            except PageNotAnInteger:
+                page = 1
+
+            # 每页显示的记录条数
+            p = Paginator(all_exp, per_page=5, request=request)
+            exps = p.page(page)
+
+            return render(request, "experiment_list.html", {
+                "all_exp": exps,
+                "exp_num": exp_num,
+            })

@@ -64,3 +64,15 @@ class UserCourses(BaseModel):  # 用户学习的课程
     class Meta:
         verbose_name = '用户课程'
         verbose_name_plural = '用户课程'
+
+
+class GlobalMessage(BaseModel):  # 全局消息
+    title = models.TextField(verbose_name="消息标题")
+    content = models.TextField(verbose_name="消息内容")
+
+    class Meta:
+        verbose_name = "全局消息"
+        verbose_name_plural = "全局消息"
+
+    def __str__(self):
+        return self.title

@@ -17,6 +17,8 @@ class TeacherAdmin(object):
     # 过滤器
     list_editable = ['name', 'desc', 'gender', 'mobile_number', 'email', 'course_nums', 'detail']
     # 设置可编辑字段
+    readonly_fields = ["c_time"]
+    # 只读字段
 
 
 xadmin.site.register(Teacher, TeacherAdmin)

@@ -1,6 +1,6 @@
 import xadmin
 
-from apps.operations.models import CourseComment, UserMessage, UserCourses,Banner
+from apps.operations.models import CourseComment, UserMessage, UserCourses, Banner, GlobalMessage
 
 
 class CourseCommentAdmin(object):
@@ -35,6 +35,7 @@ class UserMessageAdmin(object):
     list_editable = ['user', 'content', 'has_read']
     # 设置可编辑字段
 
+
 class UserCoursesAdmin(object):
     list_display = ['user', 'course', 'is_finished']
     # 后台默认显示
@@ -43,9 +44,31 @@ class UserCoursesAdmin(object):
     list_filter = ['user', 'course', 'is_finished']
     # 过滤器
     list_editable = ['user', 'course', 'is_finished']
+
     # 设置可编辑字段
+
+    def save_models(self):
+        obj = self.new_obj
+        if not obj.id:
+            obj.save()
+            course = obj.course
+            course.student_nums += 1
+            course.save()
+
+
+class GlobalMessageAdmin(object):
+    list_display = ['title', 'content', 'c_time']
+    # 后台默认显示
+    search_fields = ['title']
+    # 搜索
+    list_filter = ['title']
+    # 过滤器
+    list_editable = ['content']
+    # 设置可编辑字段
+
 
 xadmin.site.register(CourseComment, CourseCommentAdmin)
 xadmin.site.register(UserCourses, UserCoursesAdmin)
 xadmin.site.register(UserMessage, UserMessageAdmin)
 xadmin.site.register(Banner, BannerAdmin)
+xadmin.site.register(GlobalMessage, GlobalMessageAdmin)
