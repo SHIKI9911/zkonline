@@ -35,10 +35,9 @@ class CourseDetailView(View):
     def get(self, request, course_id, *args, **kwargs):
         # 从数据库中获取数据
         course = Course.objects.get(id=int(course_id))
-        course.click_nums += 1
         course.save()
 
-        user_course = UserCourses.objects.filter(course=course,user=request.user)
+        user_course = UserCourses.objects.filter(course=course, user=request.user)
         if user_course:
             course = Course.objects.get(id=int(course_id))
 
@@ -49,16 +48,9 @@ class CourseDetailView(View):
                 course.student_nums += 1
                 course.save()
 
-            course_resources = CourseResource.objects.filter(course=course)
-
-            return render(request, "course_lesson.html", {
+        return render(request, "course_lesson.html", {
                 "course": course,
-                "course_resources": course_resources,
             })
-
-        return render(request, "course_detail.html", {
-            "course": course,
-        })
 
 
 class CourseVideoView(LoginRequiredMixin, View):
@@ -96,9 +88,6 @@ class CourseCommentsView(LoginRequiredMixin, View):
 
     def get(self, request, course_id, *args, **kwargs):
         course = Course.objects.get(id=int(course_id))
-        course.click_nums += 1
-        course.save()
-
         comments = CourseComment.objects.filter(course=course).order_by("-c_time")
 
         # 查询用户是否已经关联了该课程
@@ -125,6 +114,8 @@ class CourseLessonView(LoginRequiredMixin, View):
     def get(self, request, course_id, *args, **kwargs):
         # 从数据库中获取数据
         course = Course.objects.get(id=int(course_id))
+        course.click_nums += 1
+        course.save()
         # 1. 用户和课程之间的关联
         # 2. 对view进行login登录的验证
         # 3. 其他课程
