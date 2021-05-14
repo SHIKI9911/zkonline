@@ -40,17 +40,23 @@ class CourseDetailView(View):
         user_course = UserCourses.objects.filter(course=course, user=request.user)
         if user_course:
             course = Course.objects.get(id=int(course_id))
+            course_resources = CourseResource.objects.filter(course=course)
 
-            if not user_course:
-                user_course = UserCourses(user=request.user, course=course)
-                user_course.save()
-
-                course.student_nums += 1
-                course.save()
-
-        return render(request, "course_lesson.html", {
+            return render(request, "course_lesson.html", {
                 "course": course,
+                "course_resources": course_resources,
             })
+
+        if not user_course:
+            user_course = UserCourses(user=request.user, course=course)
+            user_course.save()
+
+            course.student_nums += 1
+            course.save()
+
+        return render(request, "course_detail.html", {
+            "course": course,
+        })
 
 
 class CourseVideoView(LoginRequiredMixin, View):
@@ -71,7 +77,7 @@ class CourseVideoView(LoginRequiredMixin, View):
             user_course = UserCourses(user=request.user, course=course)
             user_course.save()
 
-            course.students += 1
+            course.student_nums += 1
             course.save()
 
         course_resources = CourseResource.objects.filter(course=course)
@@ -96,7 +102,7 @@ class CourseCommentsView(LoginRequiredMixin, View):
             user_course = UserCourses(user=request.user, course=course)
             user_course.save()
 
-            course.students += 1
+            course.student_nums += 1
             course.save()
 
         course_resources = CourseResource.objects.filter(course=course)

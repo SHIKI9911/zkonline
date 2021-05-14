@@ -19,7 +19,9 @@ UserProfile = get_user_model()
 class Banner(BaseModel):
     title = models.CharField(max_length=100, verbose_name="标题")
     image = models.ImageField(upload_to="banner/%Y/%m", max_length=200, verbose_name="轮播图")
-    url = models.URLField(max_length=200, verbose_name="访问地址")
+    url = models.URLField(max_length=200, verbose_name="访问地址", null=True)
+    is_course = models.BooleanField(default=False, verbose_name="是否课程")
+    course = models.ForeignKey(Course, null=True, verbose_name="课程", on_delete=models.DO_NOTHING)
     index = models.IntegerField(default=0, verbose_name="顺序")
 
     class Meta:

@@ -25,7 +25,7 @@ class UserProfile(AbstractUser):  # 用户信息
     gender = models.CharField(verbose_name='性别', choices=gender_choices, max_length=6)
     # 性别为男或者女，max_length 为 female 单词的长度
     profile_img = models.ImageField(verbose_name='头像', upload_to='profile_img/user/%Y/%m',
-                                    default='profile_img/teacher/default_profile.png')
+                                    default='profile_img/teacher/default_profile.png', max_length=500)
     is_teacher = models.BooleanField(verbose_name="是否教师",default=False)
     whitch_teacher = models.OneToOneField(Teacher, on_delete=models.DO_NOTHING, null=True)
 

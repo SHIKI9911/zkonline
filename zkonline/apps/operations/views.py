@@ -98,7 +98,7 @@ class SearchResultCourseView(View):
         if keywords:
             all_courses = all_courses.filter(
                 Q(name__icontains=keywords) | Q(detail__icontains=keywords) | Q(tag__icontains=keywords) | Q(
-                    category__icontains=keywords)| Q(teacher_name=keywords))
+                    category__icontains=keywords)| Q(teacher__name=keywords))
 
         try:
             page = request.GET.get('page', 1)

@@ -22,6 +22,11 @@ class HomeworkTaskInline(object):
     extra = 0
 
 
+class VideoInline(object):
+    model = Video
+    extra = 0
+
+
 class CourseAdmin(object):
     list_display = ['name', 'category', 'tag', 'learn_times', 'click_nums', 'student_nums', 'lesson_nums', 'teacher']
     # 后台默认显示
@@ -74,16 +79,29 @@ class NewCourseAdmin(object):
 
 
 class LessonAdmin(object):
-    list_display = ['course', 'name', 'learn_times']
+    list_display = ['course', 'name', 'learn_times', 'teacher']
     # 后台默认显示
     search_fields = ['course', 'name']
     # 搜索
     list_filter = ['course', 'name', 'learn_times']
     # 过滤器
-    list_editable = ['course', 'name', 'learn_times']
+    list_editable = ['course', 'name', 'learn_times', 'teacher']
     # 设置可编辑字段
-    readonly_fields = ["c_time"]
+    readonly_fields = ['course', 'c_time', 'teacher']
     # 只读字段
+    inlines = [VideoInline]
+
+    def queryset(self):
+        qs = super().queryset()
+        lesson = Lesson.objects
+        if not self.request.user.is_superuser:
+            qs = qs.filter(teacher=self.request.user.whitch_teacher)
+        return qs
+
+    def save_models(self):
+        obj = self.new_obj
+        obj.teacher = obj.course.teacher
+        obj.save()
 
 
 class VideoAdmin(object):
@@ -114,5 +132,5 @@ class CourseResourceAdmin(object):
 
 xadmin.site.register(Course, NewCourseAdmin)
 xadmin.site.register(Lesson, LessonAdmin)
-xadmin.site.register(Video, VideoAdmin)
-xadmin.site.register(CourseResource, CourseResourceAdmin)
+# xadmin.site.register(Video, VideoAdmin)
+# xadmin.site.register(CourseResource, CourseResourceAdmin)

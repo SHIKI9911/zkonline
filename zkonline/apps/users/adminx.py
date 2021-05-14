@@ -23,7 +23,7 @@ class MyUserCreationForm(UserCreationForm):
 
 
 class UserProfileAdmin(object):
-    list_display = ['username', 'real_name', 'mobile_number', 'gender', 'email', 'is_teacher']
+    list_display = ['username', 'real_name', 'gender', 'email', 'is_teacher',  'date_joined']
     # 后台默认显示
     search_fields = ['real_name', 'mobile_number', 'email']
     # 搜索

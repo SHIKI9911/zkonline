@@ -24,7 +24,7 @@ class Course(BaseModel):
     tag = models.CharField(verbose_name='标签', default='', max_length=20)
     detail = models.TextField(verbose_name='课程详情', max_length=500)
     course_img = models.ImageField(verbose_name='课程图片', upload_to='profile_img/course_img/%Y/%m',
-                                   default='course_img.default_img.jpg') # 访问路径为url，在浏览器中无法访问本地
+                                   default='course_img.default_img.jpg', max_length=500)  # 访问路径为url，在浏览器中无法访问本地
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name="教师")
 
     class Meta:
@@ -47,6 +47,7 @@ class Lesson(BaseModel):
     # 此处设计为course删除后，不保留Lesson数据
     name = models.CharField(max_length=100, verbose_name="章节名")
     learn_times = models.IntegerField(default=0, verbose_name="学习时长(分钟数)")
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name="教师", null=True)
 
     class Meta:
         verbose_name = '课程章节'
